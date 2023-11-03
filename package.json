@@ -1,0 +1,65 @@
+{
+  "name": "bounded-queue",
+  "version": "0.1.0",
+  "description": "Bounded batch queue, where items are produced and consumed based on user specified functions",
+  "main": "index.js",
+  "type": "module",
+  "license": "MIT",
+  "private": false,
+  "engines": {
+    "node": ">= 14.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "exports": {
+    ".": "./src/batch-queue.js"
+  },
+  "types": "src/batch-queue.d.ts",
+  "files": [
+    "src/**/*.js",
+    "src/**/*.d.ts"
+  ],
+  "homepage": "https://github.com/Borewit/bounded-queue",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Borewit/bounded-queue.git"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/Borewit"
+  },
+  "bugs": "https://github.com/Borewit/bounded-queue/issues",
+  "author": {
+    "name": "Borewit",
+    "url": "https://github.com/Borewit"
+  },
+  "keywords": [
+    "queue",
+    "bounded",
+    "buffer",
+    "producer",
+    "consumer",
+    "promise",
+    "async"
+  ],
+  "contributors": [],
+  "scripts": {
+    "clean": "del-cli src/**/*.js src/**/*.js.map src/**/*.d.ts",
+    "compile-src": "tsc -p src",
+    "build": "npm run clean && npm run compile-src",
+    "lint": "eslint '**/*.ts'"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
+    "del-cli": "^5.1.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-jsdoc": "^46.8.2",
+    "eslint-plugin-unicorn": "^49.0.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.2.2"
+  }
+}
