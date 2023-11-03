@@ -33,10 +33,10 @@ async function convertDatabaseRecords() {
 
   await queue(3, () => {
     // Producer
-    return readItemFromOneDatabase(); // expenive async read (produce) operation
+    return dbA.readRecord(); // expenive async read (produce) operation
   }, record => {
     // Consumer
-    writeRecordToAnotherDataBase(record); // expenive async write (consume) operation
+    return dbB.writeRecord(record); // expenive async write (consume) operation
   });
 }
 ```
