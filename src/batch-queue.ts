@@ -1,4 +1,7 @@
 
+/**
+ * return null to indicate the end of the production
+ */
 
 export type Producer<ItemType> = () => Promise<ItemType>;
 export type Consumer<ItemType> = (item: ItemType) => Promise<void>;
