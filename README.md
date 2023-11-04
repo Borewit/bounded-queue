@@ -16,7 +16,7 @@ graph LR;
 ```
 The `bounded-queue` allows the producer and consumer to operate in 
 
-## Introduction
+# Introduction
 
 Imagine you have to read records from a database and write those to another database.
 A simple way to that move the records is to first read from database _A_ and sequentially write each record to database _B_.
@@ -127,13 +127,13 @@ async function convertDatabaseRecords() {
 ```
 Using the bounded-queue, the conversion will complete in roughly half the time.
 
-## Installation
+# Installation
 
 ```shell
 npm install bounded-queue
 ```
 
-## API
+# API Documentation
 
 ### Producer
 
@@ -145,3 +145,60 @@ The producer returns (produces) a [promise](https://developer.mozilla.org/en-US/
 The consumer will be called with the first batch item available on the queue.
 It returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and when resolves, it indicates it can handle the next batch item.
 
+## BoundedQueue class
+
+### Constructor
+#### `constructor(maxQueueSize: number, producer: Producer<ItemType>, consumer: Consumer<ItemType>)`
+- **Parameters:**
+    - `maxQueueSize` (number): Maximum number of items that can be in the queue.
+    - `producer` (Producer<ItemType>): A function that produces items to be added to the queue.
+    - `consumer` (Consumer<ItemType>): A function that consumes items from the queue.
+- **Description:** Initializes a new `BoundedQueue` instance with the specified `maxQueueSize`, `producer`, and `consumer`.
+
+### Methods
+#### `length(): number`
+- **Description:** Returns the number of items currently in the queue.
+- **Returns:** The number of items in the queue.
+
+#### `run(): Promise<void>`
+- **Description:** Initiates the asynchronous processing of items in the queue. It starts filling the queue with items produced by the `producer` function and concurrently consumes items using the `consumer` function.
+- **Returns:** A Promise that resolves when all items have been produced and consumed.
+
+### Example Usage
+```javascript
+import { queue } from 'your-module';
+
+// Create and run a BoundedQueue with a maximum queue size of 10
+queue(10, producer, consumer)
+  .then(() => {
+    console.log('Queue processing completed');
+  })
+  .catch((error) => {
+    console.error('Error during queue processing:', error);
+  });
+```
+
+## Classless usage
+
+### queue() Function
+#### `queue<ItemType>(maxQueueSize: number, producer: Producer<ItemType>, consumer: Consumer<ItemType>): Promise<void>`
+- **Parameters:**
+    - `maxQueueSize` (number): Maximum number of items that can be in the queue.
+    - `producer` (Producer<ItemType>): A function that produces items to be added to the queue.
+    - `consumer` (Consumer<ItemType>): A function that consumes items from the queue.
+- **Description:** A convenience function for creating and running a `BoundedQueue` instance. It takes the same parameters as the `BoundedQueue` constructor and returns a Promise that resolves when all items have been produced and consumed.
+- **Returns:** A Promise that resolves when all items have been produced and consumed.
+
+### Example Usage
+```javascript
+import { queue } from 'your-module';
+
+// Create and run a BoundedQueue with a maximum queue size of 10
+queue(10, producer, consumer)
+  .then(() => {
+    console.log('Queue processing completed');
+  })
+  .catch((error) => {
+    console.error('Error during queue processing:', error);
+  });
+```
