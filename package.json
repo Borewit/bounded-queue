@@ -9,9 +9,7 @@
     "node": ">= 14.0.0",
     "npm": ">= 6.0.0"
   },
-  "exports": {
-    ".": "./src/bounded-queue.js"
-  },
+  "exports": "./src/bounded-queue.js",
   "types": "src/bounded-queue.d.ts",
   "files": [
     "src/**/*.js",
