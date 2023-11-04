@@ -135,16 +135,6 @@ npm install bounded-queue
 
 # API Documentation
 
-### Producer
-
-The producer returns (produces) a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which resolves the batched item tp be placed on the queue.
-`null` can be returns to indicate end of the production.
-
-### Consumer
-
-The consumer will be called with the first batch item available on the queue.
-It returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and when resolves, it indicates it can handle the next batch item.
-
 ## BoundedQueue class
 
 ### Constructor
