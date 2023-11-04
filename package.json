@@ -39,7 +39,11 @@
     "producer",
     "consumer",
     "promise",
-    "async"
+    "async",
+    "Dijkstra",
+    "semaphore",
+    "synchronization",
+    "mutex"
   ],
   "contributors": [],
   "scripts": {

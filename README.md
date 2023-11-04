@@ -3,7 +3,7 @@
 
 # bounded-queue
 
-`bounded-queue` helps you to solve the [Producer–consumer problem](https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem).
+`bounded-queue` helps solves the [producer–consumer problem](https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem).
 
 ## Introduction
 
