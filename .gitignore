@@ -7,3 +7,9 @@ node_modules
 
 # Yarn
 yarn-error.log
+
+# Compiled JavaScript
+src/**/*.js
+src/**/*.d.ts
+test/**/*.js
+test/**/*.d.ts
