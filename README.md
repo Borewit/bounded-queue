@@ -22,14 +22,51 @@ Imagine you have to read records from a database and write those to another data
 A simple way to that move the records is to first read from database _A_ and sequentially write each record to database _B_.
 
 ```js
+let batchNr = 0;
+let items2produce = 10;
+
+/**
+ * Mockup database A, producer
+ */
+const dbA = {
+    readRecord: async () => {
+        ++batchNr;
+        console.log("Producing batch #", batchNr);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        console.log("Produced  batch #", batchNr);
+        return batchNr;
+    },
+    moreRecordsAvailable: () => batchNr < items2produce
+}
+
+/**
+ * Mockup database B, consumer
+ */
+const dbB = {
+    async writeRecord(batchNr) {
+        console.log("Consuming batch #", batchNr);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        console.log("Consumed  batch #", batchNr);
+    }
+}
+
+/**
+ * Sequential conversion
+ */
 async function convertDatabaseRecords() {
 
-  while(dbA.moreRecordsAvailable) {
-    const record = await dbA.readRecord();
-    // Consumer
-    await dbB.writeRecord(record); // expenive async write (consume) operation
-  }
+    while(dbA.moreRecordsAvailable()) {
+        const record = await dbA.readRecord();
+        // Consumer
+        await dbB.writeRecord(record); // expensive async write (consume) operation
+    }
 }
+
+(async () => {
+    console.time("no-queue");
+    await convertDatabaseRecords();
+    console.timeEnd("no-queue");
+})();
 ```
 In the previous example, we either read from database A, or write to database B. 
 It would be faster if read from database A, while we write to database B, at the same time.
@@ -40,17 +77,55 @@ The `bounded-queue` helps you with that. The following example uses `bounded-que
 ```js
 import {queue} from 'bounded-queue';
 
+let batchNr = 0;
+let items2produce = 10;
+
+/**
+ * Mockup database A, producer
+ */
+const dbA = {
+    readRecord: async () => {
+        ++batchNr;
+        console.log("Producing batch #", batchNr);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        console.log("Produced  batch #", batchNr);
+        return batchNr;
+    },
+    moreRecordsAvailable: () => batchNr < items2produce
+}
+
+/**
+ * Mockup database B, consumer
+ */
+const dbB = {
+    async writeRecord(batchNr) {
+        console.log("Consuming batch #", batchNr);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        console.log("Consumed  batch #", batchNr);
+    }
+}
+
+/**
+ * Conversion using bounded-queue
+ */
 async function convertDatabaseRecords() {
 
-  await queue(3, () => {
-    // Producer
-    return dbA.moreRecordsAvailable ? null : dbA.readRecord(); // expenive async read (produce) operation
-  }, record => {
-    // Consumer
-    return dbB.writeRecord(record); // expenive async write (consume) operation
-  });
+    await queue(3, () => {
+        // Producer
+        return dbA.moreRecordsAvailable() ? dbA.readRecord() : null; // expenive async read (produce) operation
+    }, record => {
+        // Consumer
+        return dbB.writeRecord(record); // expensive async write (consume) operation
+    });
 }
+
+(async () => {
+    console.time("bounded-queue");
+    await convertDatabaseRecords();
+    console.timeEnd("bounded-queue");
+})();
 ```
+Using the bounded-queue, the conversion will complete in roughly half the time.
 
 ## Installation
 
