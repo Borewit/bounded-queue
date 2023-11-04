@@ -70,7 +70,7 @@ export class BoundedQueue<ItemType> {
     return this.queue.length;
   }
 
-  async run(): Promise<void> {
+  public async run(): Promise<void> {
     await Promise.all([this.asyncFillQueue(), this.asyncEmptyQueue()]);
   }
 }
