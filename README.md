@@ -1,5 +1,6 @@
 [![Node.js CI](https://github.com/Borewit/bounded-queue/actions/workflows/nodejs-ci.yml/badge.svg)](https://github.com/Borewit/bounded-queue/actions/workflows/nodejs-ci.yml)
 [![NPM version](https://badge.fury.io/js/bounded-queue.svg)](https://npmjs.org/package/bounded-queue)
+[![npm downloads](http://img.shields.io/npm/dm/bounded-queue.svg)](https://npmcharts.com/compare/bounded-queue?start=356)
 
 # bounded-queue
 
