@@ -6,15 +6,8 @@
 
 `bounded-queue` helps solves the [producer–consumer problem](https://en.wikipedia.org/wiki/Producer%E2%80%93consumer_problem).
 
-```mermaid
-graph LR;
-    P(Producer);
-    B[bounded-queue];
-    C(Consumer);
-    P-- batched item -->B;
-    B-- batched item -->C;
-    style B fill:#99E,stroke:#333
-```
+![bounded-queue](bounded-queue.svg)
+
 The `bounded-queue` allows the producer and consumer to operate in 
 
 # Introduction
