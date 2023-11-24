@@ -178,7 +178,7 @@ queue(10, producer, consumer)
     - `producer` (Producer<ItemType>): A function that produces items to be added to the queue.
     - `consumer` (Consumer<ItemType>): A function that consumes items from the queue.
 - **Description:** A convenience function for creating and running a `BoundedQueue` instance. It takes the same parameters as the `BoundedQueue` constructor and returns a Promise that resolves when all items have been produced and consumed.
-- **Returns:** A Promise that resolves when all items have been produced and consumed.
+- **Returns:** A Promise that resolves when all items have been produced and consumed. Resolving `null` indicated the end of the production.
 
 ### Example Usage
 ```javascript
