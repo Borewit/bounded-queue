@@ -1,0 +1,64 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
+	"organizeImports": {
+		"enabled": false
+	},
+	"formatter": {
+		"enabled": false
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"correctness": {
+				"noUnusedImports": "error",
+				"noNodejsModules": "error"
+			},
+			"recommended": true,
+			"complexity": {
+				"noForEach": "off"
+			},
+			"suspicious": {
+				"noEmptyBlockStatements": "error",
+				"useErrorMessage": "error"
+			},
+			"nursery":{
+				"noRestrictedImports": {
+					"level": "error",
+					"options": {
+						"paths": {
+							"node:buffer": "Use Uint8Array instead of Buffer"
+						}
+					}
+				}},
+			"style":{
+				"useConsistentBuiltinInstantiation": "error",
+				"useThrowNewError": "error",
+				"useThrowOnlyError": "error"
+			}
+		}
+	},
+	"files": {
+		"ignoreUnknown": true,
+		"ignore": [
+			"./coverage",
+			"./yarn",
+			"./.pnp.*",
+			"./lib/**/*.d.ts",
+			"./lib/**/*.js",
+			"./test/**/*.d.ts",
+			"./test/**/*.js"
+		]
+	},
+	"overrides": [
+		{
+			"include": ["./test/**/*", "./lib/index.ts", "./lib/FileTokenizer.ts"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noNodejsModules": "off"
+					}
+				}
+			}
+		}
+	]
+}
