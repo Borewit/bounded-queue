@@ -33,7 +33,8 @@
 			"style":{
 				"useConsistentBuiltinInstantiation": "error",
 				"useThrowNewError": "error",
-				"useThrowOnlyError": "error"
+				"useThrowOnlyError": "error",
+				"noNonNullAssertion": "off"
 			}
 		}
 	},
