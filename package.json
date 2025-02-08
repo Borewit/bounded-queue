@@ -1,6 +1,6 @@
 {
   "name": "bounded-queue",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Bounded batch queue, where items are produced and consumed based on user specified functions",
   "type": "module",
   "license": "MIT",
