@@ -16,7 +16,7 @@ class MockProducer<T> {
 
 class MockConsumer<T> {
 
-  public itemsReceived: number = 0;
+  public itemsReceived = 0;
 
   constructor(private timeToProduce: number) {
   }
